@@ -809,11 +809,11 @@ function renderEcho() {
         '<div class="echo-progress-text" id="echo-prog-text">' + revealedCount + ' / ' + gs.totalLetters + ' letters revealed</div>' +
     '</div>';
 
-    var scorePrev = Math.max(0, Math.round(100 - (revealedCount / gs.totalLetters) * 60 - gs.wrongGuesses * 15));
+    var scorePrev = Math.max(0, Math.round(100 - (revealedCount / gs.totalLetters) * 60));
     var scoreHtml = '<div class="echo-score-preview" id="echo-score-prev">Potential score: ~' + scorePrev + '</div>';
 
     var inner = '<div class="game-panel">' +
-        '<p class="instructions" style="text-align:center;margin-bottom:16px;">Letters appear one at a time. Guess the phrase before it\'s fully revealed! Wrong guesses instantly reveal 2 extra letters.</p>' +
+        '<p class="instructions" style="text-align:center;margin-bottom:16px;">Letters appear one at a time. Guess the phrase before it\'s fully revealed! The fewer letters shown when you guess correctly, the higher your score.</p>' +
         '<div class="veil-category-bar"><div class="label">Clue</div><div class="value">' + p.clue + '</div></div>' +
         displayHtml +
         progressHtml +
@@ -854,7 +854,7 @@ function updateEchoDisplay() {
     if (progText) progText.textContent = revealedCount + ' / ' + gs.totalLetters + ' letters revealed';
     var scoreEl = document.getElementById('echo-score-prev');
     if (scoreEl) {
-        var scorePrev = Math.max(0, Math.round(100 - (revealedCount / gs.totalLetters) * 60 - gs.wrongGuesses * 15));
+        var scorePrev = Math.max(0, Math.round(100 - (revealedCount / gs.totalLetters) * 60));
         scoreEl.textContent = 'Potential score: ~' + scorePrev;
     }
 }
@@ -869,30 +869,18 @@ function checkEcho() {
     if (guess === target) {
         var revealedCount = Object.keys(gs.revealed).length;
         var revealPen = (revealedCount / gs.totalLetters) * 60;
-        var wrongPen = gs.wrongGuesses * 15;
-        var score = 100 - revealPen - wrongPen;
+        var score = 100 - revealPen;
         showResults('echo', score, [
             { value: formatTime(state.elapsed), label: 'Time' },
-            { value: revealedCount + '/' + gs.totalLetters, label: 'Revealed' },
-            { value: String(gs.wrongGuesses), label: 'Wrong' }
+            { value: revealedCount + '/' + gs.totalLetters, label: 'Revealed' }
         ], p.answer);
         return;
     }
 
     gs.wrongGuesses++;
-    var p2 = PUZZLES.echo[state.currentDay];
-    for (var pen = 0; pen < 2; pen++) {
-        if (gs.revealIdx < p2.revealOrder.length) {
-            var pos = gs.letterPositions[p2.revealOrder[gs.revealIdx]];
-            if (pos !== undefined) gs.revealed[pos] = true;
-            gs.revealIdx++;
-        }
-    }
-    showToast('Wrong — 2 extra letters revealed', 'error');
-    var savedVal = inp.value;
-    renderEcho();
-    var newInp = document.getElementById('echo-input');
-    if (newInp) { newInp.value = savedVal; newInp.focus(); }
+    showToast('Not quite — try again', 'error');
+    inp.value = '';
+    inp.focus();
 }
 
 /* ============================================================
