@@ -718,7 +718,6 @@ function veilSolvePhrase(idx) {
 
     if (guess === target || guess === target.replace(/ /g, '')) {
         gs.solvedPhrases[idx] = true;
-        gs.score += 5;
         showToast('Correct!', 'success');
         for (var i = 0; i < target.length; i++) {
             var ch = target[i];
@@ -746,7 +745,6 @@ function checkVeilAutoCascade() {
         }
         if (allRevealed) {
             gs.solvedPhrases[i] = true;
-            gs.score += 2;
         }
     }
 }
