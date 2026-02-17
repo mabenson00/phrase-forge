@@ -1,5 +1,5 @@
 /* ============================================================
-   PHRASE FORGE — Styles (v2)
+   PHRASE FORGE — Styles (v3)
    ============================================================ */
 
 :root {
@@ -15,10 +15,8 @@
     --radius-sm: 8px;
 
     --bridges: #6c5ce7;
-    --shatter: #e17055;
     --veil: #00b894;
     --echo: #0984e3;
-    --fragments: #e84393;
 
     --success: #00b894;
     --error: #d63031;
@@ -94,7 +92,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
     font-weight: 800;
     letter-spacing: -1px;
     margin-bottom: 6px;
-    background: linear-gradient(135deg, var(--bridges), var(--fragments));
+    background: linear-gradient(135deg, var(--bridges), var(--echo));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -131,10 +129,8 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 }
 
 .game-card[data-game="bridges"]::before { background: var(--bridges); }
-.game-card[data-game="shatter"]::before { background: var(--shatter); }
 .game-card[data-game="veil"]::before { background: var(--veil); }
 .game-card[data-game="echo"]::before { background: var(--echo); }
-.game-card[data-game="fragments"]::before { background: var(--fragments); }
 
 .game-card:hover {
     transform: translateY(-4px);
@@ -203,10 +199,8 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 }
 
 .game-title-bar h2.bridges-title { color: var(--bridges); }
-.game-title-bar h2.shatter-title { color: var(--shatter); }
 .game-title-bar h2.veil-title { color: var(--veil); }
 .game-title-bar h2.echo-title { color: var(--echo); }
-.game-title-bar h2.fragments-title { color: var(--fragments); }
 
 .game-title-bar .instructions {
     font-size: 15px;
@@ -255,10 +249,8 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 
 .btn-primary { background: var(--text); color: #fff; }
 .btn-bridges { background: var(--bridges); color: #fff; }
-.btn-shatter { background: var(--shatter); color: #fff; }
 .btn-veil { background: var(--veil); color: #fff; }
 .btn-echo { background: var(--echo); color: #fff; }
-.btn-fragments { background: var(--fragments); color: #fff; }
 .btn-outline { background: transparent; border: 2px solid var(--border); color: var(--text); }
 .btn-outline:hover { border-color: var(--text-muted); }
 .btn-sm { padding: 8px 18px; font-size: 13px; }
@@ -285,7 +277,6 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 
 .text-input:focus { border-color: var(--text); }
 .text-input.input-bridges:focus { border-color: var(--bridges); }
-.text-input.input-shatter:focus { border-color: var(--shatter); }
 .text-input.input-veil:focus { border-color: var(--veil); }
 .text-input.input-echo:focus { border-color: var(--echo); }
 
@@ -415,94 +406,6 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
     color: var(--text-muted);
     min-height: 20px;
     margin-top: 4px;
-}
-
-/* ============================================================
-   SHATTER
-   ============================================================ */
-
-.shatter-tiles {
-    display: flex;
-    gap: 14px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 24px;
-}
-
-.shard {
-    padding: 16px 24px;
-    border-radius: var(--radius-sm);
-    font-family: 'Poppins', sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    transition: all 0.3s;
-    position: relative;
-}
-
-.shard.active {
-    background: linear-gradient(135deg, var(--shatter), #fab1a0);
-    color: #fff;
-    box-shadow: 0 4px 16px rgba(225, 112, 85, 0.25);
-    cursor: pointer;
-}
-
-.shard.active:nth-child(odd) { transform: rotate(-2deg); }
-.shard.active:nth-child(even) { transform: rotate(2deg); }
-
-.shard.selected {
-    outline: 3px solid var(--text);
-    outline-offset: 3px;
-    transform: scale(1.05) rotate(0deg) !important;
-    box-shadow: 0 6px 24px rgba(225, 112, 85, 0.35);
-}
-
-.shatter-selection-info {
-    text-align: center;
-    margin: 16px 0 8px;
-    min-height: 44px;
-}
-
-.shatter-selection-info .sel-label {
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-light);
-    margin-bottom: 4px;
-}
-
-.shatter-selection-info .sel-letters {
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: var(--shatter);
-}
-
-.shard.eliminated {
-    background: var(--bg);
-    color: var(--text-light);
-    text-decoration: line-through;
-    opacity: 0.5;
-    transform: scale(0.92) !important;
-}
-
-.shatter-feedback {
-    text-align: center;
-    min-height: 48px;
-    margin-bottom: 16px;
-}
-
-.shatter-feedback .info-line {
-    font-size: 14px;
-    color: var(--text-muted);
-    margin: 4px 0;
-}
-
-.shatter-feedback .info-line.category {
-    color: var(--shatter);
-    font-weight: 700;
 }
 
 /* ============================================================
@@ -813,120 +716,6 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 }
 
 /* ============================================================
-   FRAGMENTS
-   ============================================================ */
-
-.fragments-info {
-    text-align: center;
-    min-height: 44px;
-    margin-bottom: 16px;
-}
-
-.fragments-info p {
-    font-size: 14px;
-    color: var(--text-muted);
-    margin: 3px 0;
-}
-
-.fragments-info .reveal {
-    color: var(--fragments);
-    font-weight: 700;
-}
-
-.fragments-pool {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 28px;
-    min-height: 56px;
-}
-
-.frag-tile {
-    padding: 12px 18px;
-    border-radius: var(--radius-sm);
-    font-family: 'Poppins', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: all 0.15s;
-    user-select: none;
-    border: 2px solid transparent;
-}
-
-.frag-tile.in-pool {
-    background: var(--bg);
-    border-color: var(--border);
-    color: var(--text);
-}
-
-.frag-tile.in-pool:hover { border-color: var(--fragments); background: #fce4ef; }
-.frag-tile.used { opacity: 0.2; cursor: default; pointer-events: none; }
-.frag-tile.eliminated {
-    background: #f0efed;
-    border-color: #e0dfdd;
-    color: var(--text-light);
-    text-decoration: line-through;
-    opacity: 0.45;
-    cursor: default;
-    pointer-events: none;
-}
-
-.frag-tile.locked {
-    background: var(--success);
-    color: #fff;
-    border-color: var(--success);
-    cursor: default;
-    pointer-events: none;
-}
-
-.fragments-assembly-label {
-    text-align: center;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--text-light);
-    margin-bottom: 10px;
-}
-
-.fragments-assembly {
-    display: flex;
-    gap: 4px;
-    justify-content: center;
-    flex-wrap: wrap;
-    min-height: 60px;
-    padding: 16px;
-    background: var(--bg);
-    border-radius: var(--radius-sm);
-    border: 2px dashed var(--border);
-    margin-bottom: 8px;
-}
-
-.fragments-assembly .frag-tile {
-    background: linear-gradient(135deg, var(--fragments), #fd79a8);
-    color: #fff;
-    border-color: transparent;
-    font-size: 18px;
-    padding: 10px 14px;
-}
-
-.fragments-assembly .frag-tile:hover { opacity: 0.8; }
-.fragments-assembly .frag-tile.locked { background: var(--success); }
-
-.fragments-assembled-word {
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: var(--fragments);
-    min-height: 28px;
-    margin-bottom: 8px;
-}
-
-/* ============================================================
    RESULTS
    ============================================================ */
 
@@ -1006,16 +795,12 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
     .bridges-connector { transform: rotate(90deg); padding: 8px 0; }
     .bridges-letter-cell { width: 30px; height: 36px; font-size: 17px; }
 
-    .shard { font-size: 18px; padding: 12px 18px; }
-
     .veil-display { font-size: 13px; letter-spacing: 2px; }
     .veil-row { flex-direction: column; align-items: flex-start; gap: 6px; }
     .veil-phrase-input .text-input { max-width: 140px; }
     .letter-btn { width: 32px; height: 36px; font-size: 14px; }
 
     .echo-cell { width: 32px; height: 40px; font-size: 18px; }
-
-    .frag-tile { font-size: 16px; padding: 10px 14px; }
 
     .picker-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 8px; }
     .day-card { padding: 14px 8px; }

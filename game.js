@@ -8,14 +8,12 @@
 var LAUNCH_DATE = new Date(2026, 1, 17);
 
 var GAME_META = {
-    bridges:   { icon: '🌉', title: 'Bridges',   tagline: 'Find the word that connects two phrases',    color: 'bridges'   },
-    shatter:   { icon: '💎', title: 'Shatter',    tagline: 'Reassemble the shattered phrase',            color: 'shatter'   },
-    veil:      { icon: '🎭', title: 'Veil',       tagline: 'Reveal hidden phrases letter by letter',     color: 'veil'      },
-    echo:      { icon: '📡', title: 'Echo',       tagline: 'Guess the phrase before it fully appears',   color: 'echo'      },
-    fragments: { icon: '🧩', title: 'Fragments',  tagline: 'Piece together the scrambled fragments',     color: 'fragments' }
+    bridges: { icon: '🌉', title: 'Bridges',  tagline: 'Find the word that connects two phrases', color: 'bridges' },
+    veil:    { icon: '🎭', title: 'Veil',     tagline: 'Reveal hidden phrases letter by letter',  color: 'veil'    },
+    echo:    { icon: '📡', title: 'Echo',     tagline: 'Guess the phrase before it fully appears', color: 'echo'    }
 };
 
-var GAME_ORDER = ['bridges', 'shatter', 'veil', 'echo', 'fragments'];
+var GAME_ORDER = ['bridges', 'veil', 'echo'];
 
 /* ============================================================
    PUZZLE DATA — 7 per game
@@ -23,198 +21,138 @@ var GAME_ORDER = ['bridges', 'shatter', 'veil', 'echo', 'fragments'];
 
 var PUZZLES = {
 
-    /* ---------- BRIDGES ---------- */
+    /* ---------- BRIDGES ----------
+       cat1 clues the full left phrase (phrase1 + bridge)
+       cat2 clues the full right phrase (bridge + phrase2)  */
     bridges: [
         {
             phrase1: 'THUNDER', phrase2: 'TROOPER', bridge: 'STORM',
             fullPhrase1: 'THUNDERSTORM', fullPhrase2: 'STORMTROOPER',
-            cat1: "Nature's Light Show", cat2: 'Sci-Fi Infantry',
+            cat1: "When Zeus throws a tantrum",
+            cat2: "White-armored galactic infantry",
             revealOrder1: [2, 4, 1, 3, 6, 5, 0],
             revealOrder2: [4, 2, 3, 1, 6, 5, 0]
         },
         {
             phrase1: 'BREAK', phrase2: 'FOOD', bridge: 'FAST',
             fullPhrase1: 'BREAKFAST', fullPhrase2: 'FAST FOOD',
-            cat1: 'Morning Meal', cat2: 'Drive-Thru Fare',
+            cat1: "The meal that ends your nightly hunger strike",
+            cat2: "Drive-through dinner",
             revealOrder1: [4, 0, 1, 2, 3],
             revealOrder2: [0, 3, 1, 2]
         },
         {
             phrase1: 'FIRE', phrase2: 'OUT', bridge: 'WORK',
             fullPhrase1: 'FIREWORK', fullPhrase2: 'WORKOUT',
-            cat1: 'Fourth of July Spectacle', cat2: 'Gym Session',
+            cat1: "Katy Perry hit or July 4th spectacle",
+            cat2: "Why you're sore on Tuesday",
             revealOrder1: [0, 1, 2, 3],
             revealOrder2: [1, 0, 2]
         },
         {
             phrase1: 'BLACK', phrase2: 'CAGE', bridge: 'BIRD',
             fullPhrase1: 'BLACKBIRD', fullPhrase2: 'BIRDCAGE',
-            cat1: 'Beatles Song', cat2: 'Robin Williams Film',
+            cat1: "Paul McCartney's dark flier",
+            cat2: "Robin Williams in drag, essentially",
             revealOrder1: [4, 0, 3, 1, 2],
             revealOrder2: [2, 0, 1, 3]
         },
         {
             phrase1: 'HEAD', phrase2: 'WIDTH', bridge: 'BAND',
             fullPhrase1: 'HEADBAND', fullPhrase2: 'BANDWIDTH',
-            cat1: 'Hair Accessory', cat2: 'Internet Measure',
+            cat1: "Jazzercise essential from the '80s",
+            cat2: "What your ISP is always throttling",
             revealOrder1: [3, 0, 1, 2],
             revealOrder2: [0, 2, 4, 1, 3]
         },
         {
             phrase1: 'MOON', phrase2: 'HOUSE', bridge: 'LIGHT',
             fullPhrase1: 'MOONLIGHT', fullPhrase2: 'LIGHTHOUSE',
-            cat1: 'Oscar-Winning Film', cat2: 'Coastal Beacon',
+            cat1: "2017 Best Picture envelope mix-up winner",
+            cat2: "Coastal tower that guides sailors home",
             revealOrder1: [0, 3, 1, 2],
             revealOrder2: [0, 2, 3, 1, 4]
         },
         {
             phrase1: 'BACK', phrase2: 'FLY', bridge: 'FIRE',
             fullPhrase1: 'BACKFIRE', fullPhrase2: 'FIREFLY',
-            cat1: 'Plan Gone Wrong', cat2: 'Joss Whedon Sci-Fi',
+            cat1: "When a scheme explodes in your face",
+            cat2: "Whedon's one-season space western",
             revealOrder1: [3, 0, 2, 1],
             revealOrder2: [2, 0, 1]
         }
     ],
 
-    /* ---------- SHATTER ---------- */
-    shatter: [
-        {
-            answer: 'MOUNT EVEREST', category: 'Natural Wonder',
-            pieces: ['VENTURE', 'MOTES'],
-            decoys: ['MONET', 'SERVE', 'STERN', 'MOUSE']
-        },
-        {
-            answer: 'GOLDEN GATE', category: 'Famous Bridge',
-            pieces: ['OGLED', 'AGENT'],
-            decoys: ['LODGE', 'TANGO', 'NOTED', 'EAGLE']
-        },
-        {
-            answer: 'CENTRAL PARK', category: 'NYC Landmark',
-            pieces: ['PLANTER', 'RACK'],
-            decoys: ['CARPET', 'RENTAL', 'CLANK', 'REACT']
-        },
-        {
-            answer: 'HARRY POTTER', category: 'Wizarding World',
-            pieces: ['TROPHY', 'RATER'],
-            decoys: ['POETRY', 'PARROT', 'HOTTER', 'PARTY']
-        },
-        {
-            answer: 'MAGIC CARPET', category: 'Aladdin\'s Ride',
-            pieces: ['GRIMACE', 'PACT'],
-            decoys: ['IMPACT', 'TRAGIC', 'PIRATE', 'CREAM']
-        },
-        {
-            answer: 'GRAND PIANO', category: 'Musical Instrument',
-            pieces: ['ADORING', 'PAN'],
-            decoys: ['GRIND', 'PRONG', 'RAPID', 'DOING']
-        },
-        {
-            answer: 'NORTH POLE', category: "Santa's Home",
-            pieces: ['HONOR', 'PELT'],
-            decoys: ['PHONE', 'LEMON', 'TENOR', 'OTHER']
-        }
-    ],
-
-    /* ---------- VEIL ---------- */
+    /* ---------- VEIL ----------
+       Clues are cryptic hints, not direct category labels */
     veil: [
         {
-            category: 'Famous Artworks',
+            clue: "Canvases worth more than most buildings",
             phrases: ['STARRY NIGHT', 'THE SCREAM', 'GUERNICA', 'MONA LISA', 'WATER LILIES']
         },
         {
-            category: 'Disney Movies',
+            clue: "Animated tales that launched a thousand lunchboxes",
             phrases: ['FROZEN', 'THE LION KING', 'ALADDIN', 'MULAN', 'FINDING NEMO']
         },
         {
-            category: 'World Capitals',
+            clue: "Five dots where world leaders hang their hats",
             phrases: ['TOKYO', 'LONDON', 'PARIS', 'CAIRO', 'BUENOS AIRES']
         },
         {
-            category: 'Types of Dance',
+            clue: "You'd learn these in Buenos Aires, Vienna, or Seville",
             phrases: ['BALLET', 'SALSA', 'TANGO', 'WALTZ', 'FLAMENCO']
         },
         {
-            category: 'Shakespeare Plays',
+            clue: "The Globe Theatre's most performed tragedies and tales",
             phrases: ['HAMLET', 'OTHELLO', 'MACBETH', 'THE TEMPEST', 'ROMEO AND JULIET']
         },
         {
-            category: 'Olympic Sports',
+            clue: "Summer Games events with very different uniforms",
             phrases: ['GYMNASTICS', 'FENCING', 'ARCHERY', 'TRIATHLON', 'WATER POLO']
         },
         {
-            category: 'Space Missions',
+            clue: "NASA gave them names before sending them skyward",
             phrases: ['APOLLO', 'GEMINI', 'VOYAGER', 'CHALLENGER', 'DISCOVERY']
         }
     ],
 
-    /* ---------- ECHO ---------- */
+    /* ---------- ECHO ----------
+       Clues are cryptic crossword-style hints */
     echo: [
         {
-            answer: 'BOHEMIAN RHAPSODY', category: 'Iconic Rock Song',
+            answer: 'BOHEMIAN RHAPSODY',
+            clue: "Queen's six-minute opus that defied every radio convention",
             revealOrder: [15, 14, 11, 0, 4, 8, 12, 2, 9, 7, 5, 6, 10, 1, 13, 3]
         },
         {
-            answer: 'JURASSIC PARK', category: 'Spielberg Blockbuster',
+            answer: 'JURASSIC PARK',
+            clue: "1993 blockbuster where DNA brought the past roaring back",
             revealOrder: [11, 0, 6, 8, 1, 5, 3, 4, 2, 10, 7, 9]
         },
         {
-            answer: 'STAIRWAY TO HEAVEN', category: 'Led Zeppelin Classic',
+            answer: 'STAIRWAY TO HEAVEN',
+            clue: "Eight-minute prog-rock epic allegedly banned from guitar shops",
             revealOrder: [5, 7, 13, 10, 15, 3, 4, 0, 1, 8, 9, 2, 6, 12, 11, 14]
         },
         {
-            answer: 'GONE WITH THE WIND', category: 'Epic Civil War Film',
+            answer: 'GONE WITH THE WIND',
+            clue: "Frankly my dear, this saga is nearly four hours long",
             revealOrder: [14, 0, 4, 11, 7, 9, 6, 8, 2, 13, 5, 12, 1, 3, 10]
         },
         {
-            answer: 'THUNDERSTRUCK', category: 'AC/DC Anthem',
+            answer: 'THUNDERSTRUCK',
+            clue: "Angus Young's opening riff that electrifies arenas worldwide",
             revealOrder: [12, 11, 4, 2, 10, 1, 7, 3, 0, 8, 6, 9, 5]
         },
         {
-            answer: 'YELLOW SUBMARINE', category: 'Beatles Hit',
+            answer: 'YELLOW SUBMARINE',
+            clue: "Fab Four's animated adventure beneath the waves",
             revealOrder: [0, 5, 8, 9, 7, 11, 13, 12, 6, 2, 3, 10, 4, 1, 14]
         },
         {
-            answer: 'IMAGINE DRAGONS', category: 'Modern Rock Band',
+            answer: 'IMAGINE DRAGONS',
+            clue: "'Radioactive' hitmakers out of Las Vegas",
             revealOrder: [7, 1, 13, 11, 8, 3, 10, 5, 12, 0, 4, 2, 9, 6]
-        }
-    ],
-
-    /* ---------- FRAGMENTS ---------- */
-    fragments: [
-        {
-            answer: 'JURASSIC PARK', answerNoSpaces: 'JURASSICPARK', category: 'Blockbuster Movie',
-            fragments: ['JU', 'RA', 'SS', 'IC', 'PA', 'RK'],
-            decoys: ['AR', 'KI', 'SP', 'CU', 'AS', 'RI']
-        },
-        {
-            answer: 'SUPER MARIO', answerNoSpaces: 'SUPERMARIO', category: 'Video Game Icon',
-            fragments: ['SU', 'PE', 'RM', 'AR', 'IO'],
-            decoys: ['MA', 'RI', 'UP', 'OS', 'ER']
-        },
-        {
-            answer: 'BUBBLE WRAP', answerNoSpaces: 'BUBBLEWRAP', category: 'Popping Pastime',
-            fragments: ['BU', 'BB', 'LE', 'WR', 'AP'],
-            decoys: ['BL', 'WA', 'PB', 'RU', 'EB']
-        },
-        {
-            answer: 'CHEESEBURGER', answerNoSpaces: 'CHEESEBURGER', category: 'Fast Food Classic',
-            fragments: ['CH', 'EE', 'SE', 'BU', 'RG', 'ER'],
-            decoys: ['BE', 'GR', 'EC', 'SH', 'UE', 'RS']
-        },
-        {
-            answer: 'GINGER SNAP', answerNoSpaces: 'GINGERSNAP', category: 'Holiday Cookie',
-            fragments: ['GI', 'NG', 'ER', 'SN', 'AP'],
-            decoys: ['GE', 'RA', 'NI', 'PS', 'SG']
-        },
-        {
-            answer: 'PEANUT BUTTER', answerNoSpaces: 'PEANUTBUTTER', category: 'Sandwich Spread',
-            fragments: ['PE', 'AN', 'UT', 'BU', 'TT', 'ER'],
-            decoys: ['BE', 'TN', 'UP', 'AT', 'RE', 'NU']
-        },
-        {
-            answer: 'TREASURE', answerNoSpaces: 'TREASURE', category: "Pirate's Goal",
-            fragments: ['TR', 'EA', 'SU', 'RE'],
-            decoys: ['TE', 'RS', 'AU', 'ER', 'US']
         }
     ]
 };
@@ -245,13 +183,13 @@ function init() {
 
 function loadScores() {
     try {
-        var raw = localStorage.getItem('pf_scores_v2');
+        var raw = localStorage.getItem('pf_scores_v3');
         if (raw) state.scores = JSON.parse(raw);
     } catch (e) { state.scores = {}; }
 }
 
 function saveScores() {
-    try { localStorage.setItem('pf_scores_v2', JSON.stringify(state.scores)); } catch (e) {}
+    try { localStorage.setItem('pf_scores_v3', JSON.stringify(state.scores)); } catch (e) {}
 }
 
 function getScore(gameId, dayIdx) {
@@ -319,7 +257,6 @@ function cleanup() {
    ============================================================ */
 
 function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
-
 function getStars(score) { return score >= 90 ? 3 : score >= 60 ? 2 : score > 0 ? 1 : 0; }
 function starStr(n) { var s = ''; for (var i = 0; i < 3; i++) s += i < n ? '⭐' : '☆'; return s; }
 
@@ -331,15 +268,6 @@ function showToast(msg, type) {
     t.textContent = msg;
     c.appendChild(t);
     setTimeout(function () { if (t.parentNode) t.parentNode.removeChild(t); }, 3000);
-}
-
-function shuffle(arr) {
-    var a = arr.slice();
-    for (var i = a.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
-    }
-    return a;
 }
 
 function gameChrome(gameId, innerHtml) {
@@ -374,7 +302,6 @@ function renderHome() {
     state.view = 'home';
     state.currentGame = null;
     var app = document.getElementById('app');
-    var todayIdx = getTodayIndex(GAME_ORDER[0]);
     var html = '<div class="home-header">' +
         '<h1>Phrase Forge</h1>' +
         '<p>Daily word puzzles — test your knowledge and wordplay</p>' +
@@ -469,13 +396,7 @@ function launchGame(gameId, dayIdx) {
     state.currentGame = gameId;
     state.currentDay = dayIdx;
     gs = {};
-    var fn = {
-        bridges: initBridges,
-        shatter: initShatter,
-        veil: initVeil,
-        echo: initEcho,
-        fragments: initFragments
-    };
+    var fn = { bridges: initBridges, veil: initVeil, echo: initEcho };
     fn[gameId]();
 }
 
@@ -539,13 +460,7 @@ function giveUpGame(gameId, answerText) {
    ============================================================ */
 
 function initBridges() {
-    var p = PUZZLES.bridges[state.currentDay];
-    gs = {
-        wrongGuesses: 0,
-        revealStep: 0,
-        side1Solved: false,
-        side2Solved: false
-    };
+    gs = { wrongGuesses: 0, revealStep: 0, side1Solved: false, side2Solved: false };
     renderBridges();
     startTimer();
 }
@@ -576,7 +491,7 @@ function renderBridges() {
     if (gs.wrongGuesses > 0) info = 'Wrong guesses: ' + gs.wrongGuesses;
 
     var inner = '<div class="game-panel"><div class="bridges-layout">' +
-        '<p class="instructions">Two phrases share a hidden bridge word. You can guess the bridge word OR either side word. Correct side guesses fill in for free. Wrong guesses reveal a letter.</p>' +
+        '<p class="instructions">Two phrases share a hidden bridge word. Guess the bridge word, or guess either side phrase to reveal it for free. Wrong guesses reveal a letter.</p>' +
         '<div class="bridges-phrases">' +
             '<div class="bridges-side"><div class="side-category">' + p.cat1 + '</div><div class="side-letters">' + leftCells + '</div></div>' +
             '<div class="bridges-connector">🔗</div>' +
@@ -644,131 +559,6 @@ function checkBridges() {
     showToast('Not it — a letter has been revealed', 'error');
     inp.value = '';
     renderBridges();
-}
-
-/* ============================================================
-   SHATTER
-   ============================================================ */
-
-function initShatter() {
-    var p = PUZZLES.shatter[state.currentDay];
-    var allTiles = shuffle(p.pieces.concat(p.decoys));
-    gs = {
-        tiles: allTiles.map(function (t, i) { return { text: t, idx: i, eliminated: false }; }),
-        wrongGuesses: 0,
-        selectedTiles: new Set()
-    };
-    renderShatter();
-    startTimer();
-}
-
-function renderShatter() {
-    var p = PUZZLES.shatter[state.currentDay];
-    var tilesHtml = '';
-    for (var i = 0; i < gs.tiles.length; i++) {
-        var t = gs.tiles[i];
-        var cls = 'shard';
-        if (t.eliminated) { cls += ' eliminated'; }
-        else {
-            cls += ' active';
-            if (gs.selectedTiles.has(i)) cls += ' selected';
-        }
-        tilesHtml += '<div class="' + cls + '" data-si="' + i + '">' + t.text + '</div>';
-    }
-
-    var selHtml = '';
-    if (gs.selectedTiles.size > 0) {
-        var combined = '';
-        gs.selectedTiles.forEach(function (idx) { combined += gs.tiles[idx].text; });
-        var sorted = combined.split('').sort().join('');
-        selHtml = '<div class="shatter-selection-info">' +
-            '<div class="sel-label">Selected letters (sorted)</div>' +
-            '<div class="sel-letters">' + sorted + '</div>' +
-        '</div>';
-    } else {
-        selHtml = '<div class="shatter-selection-info"><div class="sel-label">Click tiles to select them</div></div>';
-    }
-
-    var feedHtml = '<div class="shatter-feedback">';
-    feedHtml += '<div class="info-line category">Category: ' + p.category + '</div>';
-    var words = p.answer.split(' ');
-    if (gs.wrongGuesses >= 1) {
-        feedHtml += '<div class="info-line">Word count: ' + words.length + ' (' + words.map(function (w) { return w.length; }).join(', ') + ' letters)</div>';
-    }
-    if (gs.wrongGuesses >= 2) {
-        feedHtml += '<div class="info-line">Starts with: ' + p.answer.replace(/ /g, '')[0] + '</div>';
-    }
-    feedHtml += '</div>';
-
-    var inner = '<div class="game-panel">' +
-        '<p class="instructions" style="text-align:center;margin-bottom:20px;">The answer is a well-known phrase whose letters have been split across tiles. Some tiles are decoys. Select the real tiles and type the answer. Wrong guesses eliminate a decoy and reveal clues.</p>' +
-        feedHtml +
-        '<div class="shatter-tiles">' + tilesHtml + '</div>' +
-        selHtml +
-        '<div class="input-row"><input type="text" class="text-input input-shatter" id="shatter-input" placeholder="Type the phrase…" autocomplete="off"></div>' +
-        '<div class="game-actions">' +
-            '<button class="btn btn-shatter" id="shatter-submit">Submit</button>' +
-            '<button class="btn btn-giveup" id="shatter-giveup">Give Up</button>' +
-        '</div>' +
-    '</div>';
-
-    document.getElementById('app').innerHTML = gameChrome('shatter', inner);
-    bindBack();
-
-    var shards = document.querySelectorAll('.shard.active');
-    for (var s = 0; s < shards.length; s++) {
-        shards[s].addEventListener('click', (function (idx) {
-            return function () {
-                if (gs.selectedTiles.has(idx)) gs.selectedTiles.delete(idx);
-                else gs.selectedTiles.add(idx);
-                renderShatter();
-            };
-        })(parseInt(shards[s].getAttribute('data-si'), 10)));
-    }
-
-    document.getElementById('shatter-submit').addEventListener('click', checkShatter);
-    var inp = document.getElementById('shatter-input');
-    inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') checkShatter(); });
-    document.getElementById('shatter-giveup').addEventListener('click', function () {
-        giveUpGame('shatter', p.answer);
-    });
-    inp.focus();
-}
-
-function checkShatter() {
-    var p = PUZZLES.shatter[state.currentDay];
-    var inp = document.getElementById('shatter-input');
-    var guess = inp.value.trim().toUpperCase().replace(/[^A-Z]/g, '');
-    var target = p.answer.replace(/[^A-Z]/g, '');
-    if (!guess) return;
-
-    if (guess === target) {
-        var timePen = Math.min(30, Math.floor(state.elapsed / 10));
-        var wrongPen = gs.wrongGuesses * 12;
-        var score = 100 - timePen - wrongPen;
-        showResults('shatter', score, [
-            { value: formatTime(state.elapsed), label: 'Time' },
-            { value: String(gs.wrongGuesses), label: 'Wrong' }
-        ], p.answer);
-        return;
-    }
-
-    gs.wrongGuesses++;
-    shatterEliminateDecoy();
-    showToast('Wrong — a decoy has been eliminated', 'error');
-    inp.value = '';
-    renderShatter();
-}
-
-function shatterEliminateDecoy() {
-    var p = PUZZLES.shatter[state.currentDay];
-    for (var i = 0; i < gs.tiles.length; i++) {
-        if (!gs.tiles[i].eliminated && p.decoys.indexOf(gs.tiles[i].text) !== -1) {
-            gs.tiles[i].eliminated = true;
-            gs.selectedTiles.delete(i);
-            return;
-        }
-    }
 }
 
 /* ============================================================
@@ -849,8 +639,8 @@ function renderVeil() {
     '</div>';
 
     var inner = '<div class="game-panel">' +
-        '<p class="instructions" style="text-align:center;margin-bottom:16px;">Reveal letters using the alphabet below, then solve the hidden phrases. Correct letters cost 1 point. Wrong letters cost 4. Solve phrases for bonus points!</p>' +
-        '<div class="veil-category-bar"><div class="label">Category</div><div class="value">' + p.category + '</div></div>' +
+        '<p class="instructions" style="text-align:center;margin-bottom:16px;">Five hidden phrases share a theme. Reveal letters with the alphabet, then solve the phrases. Correct letters cost 1 pt. Wrong letters cost 4.</p>' +
+        '<div class="veil-category-bar"><div class="label">Clue</div><div class="value">' + p.clue + '</div></div>' +
         phrasesHtml +
         alphaHtml +
         statsHtml +
@@ -963,6 +753,9 @@ function checkVeilAutoCascade() {
 
 /* ============================================================
    ECHO
+   The key fix: the auto-reveal interval only updates the
+   display cells and progress bar — it never touches the input.
+   Full re-render only happens on init and wrong guesses.
    ============================================================ */
 
 function initEcho() {
@@ -980,12 +773,13 @@ function initEcho() {
     };
     renderEcho();
     startTimer();
+
     gs.echoInterval = setInterval(function () {
         if (gs.revealIdx < p.revealOrder.length) {
             var pos = letterPositions[p.revealOrder[gs.revealIdx]];
             if (pos !== undefined) gs.revealed[pos] = true;
             gs.revealIdx++;
-            renderEcho();
+            updateEchoDisplay();
         } else {
             clearInterval(gs.echoInterval);
             gs.echoInterval = null;
@@ -996,13 +790,13 @@ function initEcho() {
 function renderEcho() {
     var p = PUZZLES.echo[state.currentDay];
     var words = p.answer.split(' ');
-    var displayHtml = '<div class="echo-display">';
+    var displayHtml = '<div id="echo-cells" class="echo-display">';
     var pos = 0;
     for (var w = 0; w < words.length; w++) {
         displayHtml += '<div class="word-group">';
         for (var c = 0; c < words[w].length; c++) {
             var isRevealed = gs.revealed[pos];
-            displayHtml += '<div class="echo-cell ' + (isRevealed ? 'revealed' : 'blank') + '">' + words[w][c] + '</div>';
+            displayHtml += '<div class="echo-cell ' + (isRevealed ? 'revealed' : 'blank') + '" data-pos="' + pos + '">' + words[w][c] + '</div>';
             pos++;
         }
         displayHtml += '</div>';
@@ -1013,16 +807,16 @@ function renderEcho() {
     var revealedCount = Object.keys(gs.revealed).length;
     var pct = Math.round((revealedCount / gs.totalLetters) * 100);
     var progressHtml = '<div class="echo-progress-bar">' +
-        '<div class="echo-progress-track"><div class="echo-progress-fill" style="width:' + pct + '%"></div></div>' +
-        '<div class="echo-progress-text">' + revealedCount + ' / ' + gs.totalLetters + ' letters revealed</div>' +
+        '<div class="echo-progress-track"><div class="echo-progress-fill" id="echo-fill" style="width:' + pct + '%"></div></div>' +
+        '<div class="echo-progress-text" id="echo-prog-text">' + revealedCount + ' / ' + gs.totalLetters + ' letters revealed</div>' +
     '</div>';
 
     var scorePrev = Math.max(0, Math.round(100 - (revealedCount / gs.totalLetters) * 60 - gs.wrongGuesses * 15));
-    var scoreHtml = '<div class="echo-score-preview">Potential score: ~' + scorePrev + '</div>';
+    var scoreHtml = '<div class="echo-score-preview" id="echo-score-prev">Potential score: ~' + scorePrev + '</div>';
 
     var inner = '<div class="game-panel">' +
         '<p class="instructions" style="text-align:center;margin-bottom:16px;">Letters appear one at a time. Guess the phrase before it\'s fully revealed! Wrong guesses instantly reveal 2 extra letters.</p>' +
-        '<div class="veil-category-bar"><div class="label">Category</div><div class="value">' + p.category + '</div></div>' +
+        '<div class="veil-category-bar"><div class="label">Clue</div><div class="value">' + p.clue + '</div></div>' +
         displayHtml +
         progressHtml +
         scoreHtml +
@@ -1043,6 +837,28 @@ function renderEcho() {
         giveUpGame('echo', p.answer);
     });
     inp.focus();
+}
+
+function updateEchoDisplay() {
+    var cells = document.querySelectorAll('#echo-cells .echo-cell');
+    for (var i = 0; i < cells.length; i++) {
+        var pos = parseInt(cells[i].getAttribute('data-pos'), 10);
+        if (gs.revealed[pos] && cells[i].className.indexOf('revealed') === -1) {
+            cells[i].className = 'echo-cell revealed';
+        }
+    }
+
+    var revealedCount = Object.keys(gs.revealed).length;
+    var pct = Math.round((revealedCount / gs.totalLetters) * 100);
+    var fill = document.getElementById('echo-fill');
+    if (fill) fill.style.width = pct + '%';
+    var progText = document.getElementById('echo-prog-text');
+    if (progText) progText.textContent = revealedCount + ' / ' + gs.totalLetters + ' letters revealed';
+    var scoreEl = document.getElementById('echo-score-prev');
+    if (scoreEl) {
+        var scorePrev = Math.max(0, Math.round(100 - (revealedCount / gs.totalLetters) * 60 - gs.wrongGuesses * 15));
+        scoreEl.textContent = 'Potential score: ~' + scorePrev;
+    }
 }
 
 function checkEcho() {
@@ -1066,189 +882,19 @@ function checkEcho() {
     }
 
     gs.wrongGuesses++;
+    var p2 = PUZZLES.echo[state.currentDay];
     for (var pen = 0; pen < 2; pen++) {
-        if (gs.revealIdx < p.revealOrder.length) {
-            var pos = gs.letterPositions[p.revealOrder[gs.revealIdx]];
+        if (gs.revealIdx < p2.revealOrder.length) {
+            var pos = gs.letterPositions[p2.revealOrder[gs.revealIdx]];
             if (pos !== undefined) gs.revealed[pos] = true;
             gs.revealIdx++;
         }
     }
     showToast('Wrong — 2 extra letters revealed', 'error');
-    inp.value = '';
+    var savedVal = inp.value;
     renderEcho();
-}
-
-/* ============================================================
-   FRAGMENTS
-   ============================================================ */
-
-function initFragments() {
-    var p = PUZZLES.fragments[state.currentDay];
-    var allTiles = shuffle(p.fragments.concat(p.decoys));
-    gs = {
-        pool: allTiles.map(function (t, i) { return { text: t, idx: i, used: false, eliminated: false, locked: false }; }),
-        assembly: [],
-        wrongGuesses: 0
-    };
-    renderFragments();
-    startTimer();
-}
-
-function renderFragments() {
-    var p = PUZZLES.fragments[state.currentDay];
-
-    var poolHtml = '<div class="fragments-pool">';
-    for (var i = 0; i < gs.pool.length; i++) {
-        var t = gs.pool[i];
-        var cls = 'frag-tile';
-        if (t.eliminated) cls += ' eliminated';
-        else if (t.used) cls += ' used';
-        else if (t.locked) cls += ' locked';
-        else cls += ' in-pool';
-        poolHtml += '<div class="' + cls + '" data-pi="' + i + '">' + t.text + '</div>';
-    }
-    poolHtml += '</div>';
-
-    var assemblyHtml = '<div class="fragments-assembly">';
-    for (var a = 0; a < gs.assembly.length; a++) {
-        var tile = gs.assembly[a];
-        var isLocked = tile.locked;
-        assemblyHtml += '<div class="frag-tile' + (isLocked ? ' locked' : '') + '" data-ai="' + a + '">' + tile.text + '</div>';
-    }
-    if (gs.assembly.length === 0) assemblyHtml += '<span style="color:var(--text-light);font-size:14px;">Click tiles to build the phrase</span>';
-    assemblyHtml += '</div>';
-
-    var assembled = gs.assembly.map(function (t) { return t.text; }).join('');
-    var wordHtml = '<div class="fragments-assembled-word">' + (assembled || '…') + '</div>';
-
-    var infoHtml = '<div class="fragments-info">';
-    infoHtml += '<p class="reveal" style="margin-bottom:8px;">Category: ' + p.category + '</p>';
-    if (gs.wrongGuesses >= 2 && p.fragments.length > 0) {
-        infoHtml += '<p>First fragment: <span class="reveal">' + p.fragments[0] + '</span></p>';
-    }
-    if (gs.wrongGuesses >= 3 && p.fragments.length > 1) {
-        infoHtml += '<p>Second fragment: <span class="reveal">' + p.fragments[1] + '</span></p>';
-    }
-    infoHtml += '</div>';
-
-    var inner = '<div class="game-panel">' +
-        '<p class="instructions" style="text-align:center;margin-bottom:16px;">Arrange the 2-letter tiles into a phrase. Some tiles are decoys. Wrong guesses eliminate a decoy and may lock correct tiles in place.</p>' +
-        infoHtml +
-        poolHtml +
-        '<div class="fragments-assembly-label">Your Assembly</div>' +
-        assemblyHtml +
-        wordHtml +
-        '<div class="game-actions">' +
-            '<button class="btn btn-fragments" id="frag-submit">Submit</button>' +
-            '<button class="btn btn-outline btn-sm" id="frag-clear">Clear</button>' +
-            '<button class="btn btn-giveup" id="frag-giveup">Give Up</button>' +
-        '</div>' +
-    '</div>';
-
-    document.getElementById('app').innerHTML = gameChrome('fragments', inner);
-    bindBack();
-
-    var poolTiles = document.querySelectorAll('.frag-tile.in-pool');
-    for (var pt = 0; pt < poolTiles.length; pt++) {
-        poolTiles[pt].addEventListener('click', function () {
-            var idx = parseInt(this.getAttribute('data-pi'), 10);
-            gs.pool[idx].used = true;
-            gs.assembly.push({ text: gs.pool[idx].text, poolIdx: idx, locked: gs.pool[idx].locked });
-            renderFragments();
-        });
-    }
-
-    var asmTiles = document.querySelectorAll('.fragments-assembly .frag-tile:not(.locked)');
-    for (var at = 0; at < asmTiles.length; at++) {
-        asmTiles[at].addEventListener('click', function () {
-            var idx = parseInt(this.getAttribute('data-ai'), 10);
-            var tile = gs.assembly[idx];
-            if (tile.locked) return;
-            gs.pool[tile.poolIdx].used = false;
-            gs.assembly.splice(idx, 1);
-            renderFragments();
-        });
-    }
-
-    document.getElementById('frag-submit').addEventListener('click', checkFragments);
-    document.getElementById('frag-clear').addEventListener('click', function () {
-        for (var i = gs.assembly.length - 1; i >= 0; i--) {
-            if (!gs.assembly[i].locked) {
-                gs.pool[gs.assembly[i].poolIdx].used = false;
-                gs.assembly.splice(i, 1);
-            }
-        }
-        renderFragments();
-    });
-    document.getElementById('frag-giveup').addEventListener('click', function () {
-        giveUpGame('fragments', p.answer);
-    });
-}
-
-function checkFragments() {
-    var p = PUZZLES.fragments[state.currentDay];
-    var assembled = gs.assembly.map(function (t) { return t.text; }).join('');
-    if (assembled.length === 0) return;
-
-    if (assembled === p.answerNoSpaces) {
-        var timePen = Math.min(30, Math.floor(state.elapsed / 10));
-        var wrongPen = gs.wrongGuesses * 10;
-        var score = 100 - timePen - wrongPen;
-        showResults('fragments', score, [
-            { value: formatTime(state.elapsed), label: 'Time' },
-            { value: String(gs.wrongGuesses), label: 'Wrong' }
-        ], p.answer);
-        return;
-    }
-
-    gs.wrongGuesses++;
-    fragEliminateDecoy();
-
-    if (gs.wrongGuesses === 2) {
-        fragLockFirst(0);
-    } else if (gs.wrongGuesses === 3) {
-        fragLockFirst(1);
-    }
-
-    showToast('Wrong — a decoy has been eliminated', 'error');
-
-    for (var i = gs.assembly.length - 1; i >= 0; i--) {
-        if (!gs.assembly[i].locked) {
-            gs.pool[gs.assembly[i].poolIdx].used = false;
-            gs.assembly.splice(i, 1);
-        }
-    }
-    renderFragments();
-}
-
-function fragEliminateDecoy() {
-    var p = PUZZLES.fragments[state.currentDay];
-    for (var i = 0; i < gs.pool.length; i++) {
-        if (!gs.pool[i].eliminated && !gs.pool[i].used && p.decoys.indexOf(gs.pool[i].text) !== -1) {
-            gs.pool[i].eliminated = true;
-            return;
-        }
-    }
-}
-
-function fragLockFirst(fragIdx) {
-    var p = PUZZLES.fragments[state.currentDay];
-    if (fragIdx >= p.fragments.length) return;
-    var target = p.fragments[fragIdx];
-    for (var i = 0; i < gs.pool.length; i++) {
-        if (gs.pool[i].text === target && !gs.pool[i].eliminated) {
-            gs.pool[i].locked = true;
-            gs.pool[i].used = true;
-            var alreadyInAssembly = false;
-            for (var a = 0; a < gs.assembly.length; a++) {
-                if (gs.assembly[a].poolIdx === i) { alreadyInAssembly = true; gs.assembly[a].locked = true; break; }
-            }
-            if (!alreadyInAssembly) {
-                gs.assembly.splice(fragIdx, 0, { text: target, poolIdx: i, locked: true });
-            }
-            return;
-        }
-    }
+    var newInp = document.getElementById('echo-input');
+    if (newInp) { newInp.value = savedVal; newInp.focus(); }
 }
 
 /* ============================================================
